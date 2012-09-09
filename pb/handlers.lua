@@ -1,5 +1,7 @@
 -- Copyright (c) 2011, Robert G. Jakabosky <bobby@sharedrealm.com> All rights reserved.
 
+local _M = LibStub:NewLibrary("pblua.handlers", 1)
+
 local setmetatable = setmetatable
 local rawset = rawset
 local error = error
@@ -17,10 +19,10 @@ __index = function(reg, _type)
 end,
 })
 
-module(...)
+--module(...)
 
 -- create a new specialized handler
-function new(_type, ...)
+function _M.new(_type, ...)
 	local params = {...}
 	-- get format list for the handler type.
 	local list = handler_registry[_type]
@@ -38,7 +40,7 @@ function new(_type, ...)
 	})
 end
 
-function register(_type, format, callback)
+function _M.register(_type, format, callback)
 	-- get format list for the handler type.
 	local list = handler_registry[_type]
 	list[format] = callback

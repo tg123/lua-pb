@@ -18,6 +18,11 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 -- THE SOFTWARE.
 
+local _require = LibStub:GetLibrary('pblua.require')
+local require = _require.require
+
+local _M = LibStub:NewLibrary("pblua.pack", 1)
+
 local assert = assert
 local pairs = pairs
 local print = print
@@ -116,7 +121,7 @@ local function append_raw64(buf, off, len, num, t)
 	end
 end
 
-module(...)
+--module(...)
 
 ----------------------------------------------------------------------------------
 --
@@ -334,7 +339,7 @@ local function pack_repeated(buf, off, len, field, arr, arr_len)
 	return off, len
 end
 
-function pack_unknown_fields(buf, off, len, unknowns)
+function _M.pack_unknown_fields(buf, off, len, unknowns)
 	for i=1,#unknowns do
 		local field = unknowns[i]
 		local wire = field.wire
@@ -511,7 +516,7 @@ function register_fields(mt, fields, pack)
 	end
 end
 
-function register_msg(mt)
+function _M.register_msg(mt)
 	local fields = mt.fields
 	-- setup 'pack' function for this message type.
 	get_type_pack(mt)

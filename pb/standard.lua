@@ -18,6 +18,12 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 -- THE SOFTWARE.
 
+
+local _require = LibStub:GetLibrary('pblua.require')
+local require = _require.require
+
+local _M = LibStub:NewLibrary("pblua.standardmod", 1)
+
 local assert = assert
 local error = error
 local type = type
@@ -361,9 +367,9 @@ function defines.extend(parent, name, ast)
 	return extend
 end
 
-module(...)
+-- module(...)
 
-function compile(ast)
+function _M.compile(ast)
 	local proto = {
 		['.package'] = ast.package,
 		['.imports'] = ast.imports,

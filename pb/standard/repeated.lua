@@ -1,5 +1,7 @@
 -- Copyright (c) 2011, Robert G. Jakabosky <bobby@sharedrealm.com> All rights reserved.
 
+local _M = LibStub:NewLibrary("pblua.repeated", 1)
+
 local concat = table.concat
 local setmetatable = setmetatable
 local rawset = rawset
@@ -131,9 +133,9 @@ local function new_basic_repeated(field)
 	return mt
 end
 
-module(...)
+--module(...)
 
-function new(field)
+function _M.new(field)
 	if field.is_message then
 		return new_message_repeated(field)
 	elseif field.is_group then
