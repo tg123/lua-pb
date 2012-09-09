@@ -1,5 +1,7 @@
 -- Copyright (c) 2010, Robert G. Jakabosky <bobby@sharedrealm.com> All rights reserved.
 
+local _M = LibStub:NewLibrary("pblua.unknown", 1)
+
 local concat = table.concat
 local setmetatable = setmetatable
 
@@ -36,7 +38,7 @@ function mt:addGroup(tag)
 	return field
 end
 
-module(...)
+--module(...)
 
 _M.new = new
 

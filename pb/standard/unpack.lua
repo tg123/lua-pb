@@ -18,6 +18,11 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 -- THE SOFTWARE.
 
+local _require = LibStub:GetLibrary('pblua.require')
+local require = _require.require
+
+local _M = LibStub:NewLibrary("pblua.unpack", 1)
+
 local assert = assert
 local pairs = pairs
 local print = print
@@ -41,8 +46,8 @@ local pack = require(mod_path .. "pack")
 local encode_field_tag = pack.encode_field_tag
 local wire_types = pack.wire_types
 
-local struct = require"struct"
-local sunpack = struct.unpack
+--local struct = require"struct"
+local sunpack = {}
 
 local bit = require"bit"
 local band = bit.band
@@ -65,7 +70,7 @@ local function unzigzag32(num)
 	return bxor(arshift(num, 1), -band(num, 1))
 end
 
-module(...)
+-- module(...)
 
 ----------------------------------------------------------------------------------
 --
@@ -495,7 +500,7 @@ function register_fields(mt)
 	end
 end
 
-function register_msg(mt)
+function _M.register_msg(mt)
 	local tags = mt.tags
 	-- setup 'unpack' function for this message type.
 	get_type_unpack(mt)

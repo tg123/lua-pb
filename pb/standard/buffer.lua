@@ -1,5 +1,7 @@
 -- Copyright (c) 2010, Robert G. Jakabosky <bobby@sharedrealm.com> All rights reserved.
 
+local _M = LibStub:NewLibrary("pblua.buffer", 1)
+
 local concat = table.concat
 local setmetatable = setmetatable
 
@@ -37,9 +39,9 @@ function mt:release()
 	end
 end
 
-module(...)
+--module(...)
 
-function new()
+function _M.new()
 	if cache then
 		local self = cache
 		cache = nil

@@ -18,6 +18,11 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 -- THE SOFTWARE.
 
+local _require = LibStub:GetLibrary('pblua.require')
+local require = _require.require
+
+local _M = LibStub:NewLibrary("pblua.dump", 1)
+
 local assert = assert
 local pairs = pairs
 local print = print
@@ -66,7 +71,7 @@ local function safe_string(data)
 	return data:gsub([[([^%w ])]], escapes)
 end
 
-module(...)
+--module(...)
 
 ----------------------------------------------------------------------------------
 --
@@ -201,7 +206,7 @@ local function dump_repeated(buf, off, field, arr, depth)
 	return off
 end
 
-function dump_unknown_fields(buf, off, unknowns, depth)
+function _M.dump_unknown_fields(buf, off, unknowns, depth)
 	for i=1,#unknowns do
 		local field = unknowns[i]
 		-- indent
@@ -294,7 +299,7 @@ function register_fields(mt, fields)
 	end
 end
 
-function register_msg(mt)
+function _M.register_msg(mt)
 	local fields = mt.fields
 	-- setup 'dump' function for this message type.
 	get_type_dump(mt)

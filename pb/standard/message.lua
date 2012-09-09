@@ -1,5 +1,10 @@
 -- Copyright (c) 2011, Robert G. Jakabosky <bobby@sharedrealm.com> All rights reserved.
 
+local _require = LibStub:GetLibrary('pblua.require')
+local require = _require.require
+
+local _M = LibStub:NewLibrary("pblua.message", 1)
+
 local error = error
 local assert = assert
 local tostring = tostring
@@ -17,11 +22,11 @@ local new_buffer = buffer.new
 local unknown = require(mod_path .. "unknown")
 local new_unknown = unknown.new
 
-local mod_parent_path = mod_path:match("(.*%.)[^.]*%.")
+local mod_parent_path = mod_path:match("(.*%.)[^.]*%.") or ''
 local utils = require(mod_parent_path .. "utils")
 local copy = utils.copy
 
-local _M = {}
+--local _M = {}
 
 local basic_types = {
 -- Varint types

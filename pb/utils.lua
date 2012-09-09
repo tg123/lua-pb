@@ -18,10 +18,12 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 -- THE SOFTWARE.
 
+local _M = LibStub:NewLibrary("pblua.utils", 1)
+
 local type = type
 local pairs = pairs
 
-module(...)
+--module(...)
 
 --
 -- Simple table dup function
@@ -43,7 +45,7 @@ local function copy_recur(seen, tab)
 	return new
 end
 
-function copy(tab)
+function _M.copy(tab)
 	if tab then
 		local seen = {}
 		return copy_recur(seen, tab)
