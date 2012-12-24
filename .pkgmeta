@@ -12,7 +12,6 @@ ignore:
 - bench_media_pb.lua
 - tests/raw_decode_encode.lua
 - utils.lua
-- lua-pb.toc
 - protos/nested2.proto
 - protos/media.proto
 - person.proto
