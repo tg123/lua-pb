@@ -1,14 +1,20 @@
-libs\lua-pb\fakerequire.lua
-libs\lua-pb\utils.lua
-libs\lua-pb\handlers.lua
-libs\lua-pb\standard\buffer.lua
-libs\lua-pb\standard\unknown.lua
-libs\lua-pb\standard\repeated.lua
+## Interface: 50100
+## Title: lua-pb
+## Author: tg123
 
-libs\lua-pb\standard\dump.lua
-libs\lua-pb\standard\message.lua
+pb\fakerequire.lua
+pb\utils.lua
+pb\handlers.lua
+pb\standard\buffer.lua
+pb\standard\unknown.lua
+pb\standard\repeated.lua
 
-libs\lua-pb\standard\pack.lua
-libs\lua-pb\standard\unpack.lua
+pb\standard\dump.lua
+pb\standard\message.lua
 
-libs\lua-pb\standard.lua
+pb\standard\pack.lua
+pb\standard\unpack.lua
+pb\standard.lua
+
+pb-wow.lua
+
