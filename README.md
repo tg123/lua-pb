@@ -1,71 +1,74 @@
-lua-pb
-=======
+# lua-pb
 
-Lua Protocol Buffers.
+A Protocol Buffer implementation that runs on World of Warcraft Addons.
+The lua-pb is based on the work of <https://github.com/Neopallium/lua-pb> by Neopallium
 
-Supports dynamic loading of Protocol Buffer message definition files `.proto`
+## Generate lua stub for your addon
 
-Installing
-----------
+ * install lpge
+ 
+ `luarocks install lpeg`
 
-	$ sudo luarocks install "https://raw.github.com/Neopallium/lua-pb/master/lua-pb-scm-0.rockspec"
+ * generate with `saveast.lua`
 
-Design
-------
+```
+lua saveast.lua VARNAME < FILE.proto > STUB.lua
+```
 
-Frontend `.proto` definition file parser:
+exmaple for using person.proto in wowtest folder
+```
+lua saveast.lua pbperson < person.proto > wowtest/person.lua
+```
 
-* pb/proto/scanner.lua -- LPeg lexer for `.proto` files.
-* pb/proto/util.lua    -- some utility functions.
-* pb/proto/grammar.lua -- LPeg grammar for `.proto` files.
-* pb/proto/parser.lua  -- LPeg based `.proto` -> AST tree parser.
+## Import in your addon
 
-There can be multiple Backend message definition compilers.  An optimized backend for LuaJIT
-is planned.
+You have two choices to use `lua-pb` as a library
 
-Standard backend compiler
+### As files inside your addon
 
-* pb/standard.lua          -- main compiler code.
-* pb/handlers.lua          -- a helper object for managing registered encode/decode formats.
-* pb/standard/message.lua  -- defines message interface.
-* pb/standard/repeated.lua -- defines repeated field interface.
-* pb/standard/pack.lua     -- binary format encoding (Uses modules luabitops & struct)
-* pb/standard/unpack.lua   -- binary format decoding (Uses modules luabitops & struct)
-* pb/standard/buffer.lua   -- encoding buffer
-* pb/standard/unknown.lua  -- object for hold unknown fields.
-* pb/standard/dump.lua     -- message dumping code.
+ 1. Download relase zip from <https://www.wowace.com/projects/protobuf/files>
+ 1. Copy `lua-pb` folder to your addon
+ 1. Add `path\to\lua-pb\lua-pb.xml` in your `.toc` file
+ 1. Add `path\to\pbstub.lua` in your `.toc` file
 
-Finished
---------
-* .proto definition parser
-* Message encoding/decoding
-* Dumping messages to text format.
-* Support for packing/unpacking unknown fields.
+After loaded, lua-pb would be availiable in your `addon ctx`
 
-TODO
-----
+Example (you can find exmaple in <wowtest/pb-wow-test.lua>)
 
-* rename pb/handlers.lua to pb/formats.lua
+```
+local _, ADDONSELF = ...
 
-Missing features:
+local luapb = ADDONSELF.luapb
+local person = luapb.load_proto_ast(ADDONSELF.pbperson).Person
 
-* custom options:
+local msg0 = person()
 
-	import "google/protobuf/descriptor.proto";
-	
-	extend google.protobuf.MessageOptions {
-	  optional string my_option = 51234;
-	}
-	
-	message MyMessage {
-	  option (my_option) = "Hello world!";
-	}
+msg0.name = "aa"
+msg0.id = 1
 
-* services
+print("serialize: name " .. msg0.name .. " id " .. msg0.id)
+
+local t = msg0:Serialize()
+
+assert(#t > 0, "size of t > 0")
+
+local msg1 = person()
+msg1:Parse(t)
+
+assert(msg1.name == msg0.name, "name not equal")
+assert(msg1.id == msg0.id, "id not equal")
+
+print("deserialize: name " .. msg1.name .. " id " .. msg1.id)
+
+```
 
 
-Improvements:
+### Use as an dependency (Optional for LibStub)
 
-* store unknown fields as raw binary, only fully decode when accessed.
-* LuaJIT optimized backend compiler.
+```
+local luapb = LibStub:GetLibrary('luapb')
+```
 
+## Powered by lua-pb
+
+ * [Myslot](https://www.wowace.com/projects/myslot)
