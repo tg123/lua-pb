@@ -17,11 +17,11 @@
 -- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 -- THE SOFTWARE.
+local _, ADDONSELF = ...
+local require = ADDONSELF.luapb.require
+ADDONSELF.luapb.dump = {}
 
-local _require = LibStub:GetLibrary('pblua.require')
-local require = _require.require
-
-local _M = LibStub:NewLibrary("pblua.dump", 1)
+local _M = ADDONSELF.luapb.dump
 
 local assert = assert
 local pairs = pairs

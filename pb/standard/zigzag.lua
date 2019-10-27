@@ -17,6 +17,12 @@
 -- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 -- THE SOFTWARE.
+local _, ADDONSELF = ...
+local require = ADDONSELF.luapb.require
+
+ADDONSELF.luapb.zigzag = {}
+local _M = ADDONSELF.luapb.zigzag
+
 
 local assert = assert
 local print = print
@@ -149,7 +155,7 @@ local function unzigzag32(num)
 	return bxor(arshift(num, 1), -band(num, 1))
 end
 
-module(...)
+-- module(...)
 
 _M.normalize_number = normalize_number
 

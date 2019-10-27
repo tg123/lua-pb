@@ -1,9 +1,10 @@
 -- Copyright (c) 2011, Robert G. Jakabosky <bobby@sharedrealm.com> All rights reserved.
+local _, ADDONSELF = ...
+local require = ADDONSELF.luapb.require
+ADDONSELF.luapb.message = {}
 
-local _require = LibStub:GetLibrary('pblua.require')
-local require = _require.require
+local _M = ADDONSELF.luapb.message
 
-local _M = LibStub:NewLibrary("pblua.message", 1)
 
 local error = error
 local assert = assert

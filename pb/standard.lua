@@ -18,11 +18,11 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 -- THE SOFTWARE.
 
+local _, ADDONSELF = ...
+local require = ADDONSELF.luapb.require
+ADDONSELF.luapb.standardmod = {}
 
-local _require = LibStub:GetLibrary('pblua.require')
-local require = _require.require
-
-local _M = LibStub:NewLibrary("pblua.standardmod", 1)
+local _M = ADDONSELF.luapb.standardmod
 
 local assert = assert
 local error = error
