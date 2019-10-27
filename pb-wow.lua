@@ -2,7 +2,7 @@ local ADDONNAME, ADDONSELF = ...
 
 local require = ADDONSELF.luapb.require
 
-local LUAPB_VER = 10000
+local LUAPB_VER = 101000
 
 local mod = require"standardmod"
 
